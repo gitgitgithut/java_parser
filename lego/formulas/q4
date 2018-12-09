@@ -1,0 +1,1 @@
+forall x : [3..10] . exists y : [2..7] . exists z : [2..7] . forall a : [2..10] . (!(0 = y mod a)) && (!(y = a)) && (!(0 = z mod a)) && (!(z = a)) && (!(y = z)) && (x = y + z)

@@ -1,0 +1,5 @@
+from the command line: From directory d, invoke the formula parsing and (at the moment incomplete) evaluation with, for instance,
+	java lego.Main d/lego/formulas/f1
+Recompile the system with
+	javac lego/*.java lego/parser/*.java
+from directory d. Note that on Windows, the forward slashes ('/') need to be replaced by backward slashes ('\').

@@ -1,0 +1,30 @@
+// Grammar for Lego formulas in BNF 
+<formula> ::=		<exp> <rel_op> <exp> |
+			<unary_conn> <formula> |
+			<formula> <binary_conn> <formula> |
+			<quantifier> <var> : <domain> . <formula> |
+			(<formula>)
+
+<exp> ::=		<int> |
+			<var> |
+			<exp> <int_op> <exp> |  
+			(<exp>)
+
+<rel_op> ::=		> | >= | =
+
+<unary_conn> ::=	!
+
+<binary_conn> ::=	&& | || | -> | <-> 
+
+<quantifier> ::=	forall | exists
+
+<var> ::=		identifiers
+
+<domain> ::=		[<int> .. <int>]
+
+<int> ::=		integers
+
+<int_op> ::=		+ | - | * | / | mod
+
+
+

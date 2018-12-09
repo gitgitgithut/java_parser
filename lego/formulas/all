@@ -1,0 +1,33 @@
+f1: 	forall x : [1..10] . exists y : [1..10] . (x mod y = 0) && (x >= y)
+
+f2: 	forall x : [0..5] . exists y : [0..5]. y > x
+
+f3: 	forall x : [0..100]. forall y : [1..100] . 
+	((x mod y = 0) -> exists z : [0..100] . x = y * z) &&
+	(forall z : [1..100] . 
+		(x mod y = 0) && (y mod z = 0) -> x mod z = 0)
+	
+f4:	(forall x : [0..10] . forall y : [0..10] . exists x : [0..11] . x > y)
+	<-> (forall y : [0..10] . exists x : [0..11] . x > y)
+
+f5: 	forall x : [0..100] . x > (x + y)
+
+f6: 	forall x : [0..100] . forall y : [0..100] . (x * (y+1)) = ((x*y) + x)
+
+f7: 	forall x : [0..9]. exists y : [0..9]. exists z : [0..9]. x = (y+z)
+
+f8: 	exists x : [0..9] . !(exists y : [0..9] . y > x)
+
+f9: 	forall x : [0..9] . exists y : [0..9] . (x+y) > 15
+
+f10: 	forall x : [1..9] . exists y : [1..9] . (x / y) = (y / x)
+
+f11: 	forall x : [0..100] . forall x : [0..9] . 10 > x
+
+f12: 	forall x : [0..10] . forall y : [0..10] . x >= (x/y)
+
+f13: 	forall x : [0..10] . forall y : [0..10] . x >= (x mod y)
+
+f14: 	(exists x : [1..9] . x > 11) && 0 > x
+
+f15: 	forall x : [-10..10] . (x*x >= 0) && 100 >= x*x

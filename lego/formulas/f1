@@ -1,0 +1,1 @@
+forall x : [1..10] . exists y : [1..10] . (x mod y = 0) && (x >= y)

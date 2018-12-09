@@ -1,0 +1,1 @@
+forall p : [1..100] . ((forall a : [2..100]. (!(0 = p mod a)) && (!(p = a))) && exists x : [1..100] . exists y : [1..100] . (0 = ((x * y) mod p))) -> ((0 = (x mod p)) || (0 = (y mod p)))

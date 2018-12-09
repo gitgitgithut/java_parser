@@ -1,0 +1,1 @@
+forall a : [0..50] . forall b : [1..50] . (a = ((b * (a / b)) + (a mod b)))

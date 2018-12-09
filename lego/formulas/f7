@@ -1,0 +1,2 @@
+forall x : [0..9]. exists y : [0..9]. exists z : [0..9]. x = (y+z)
+

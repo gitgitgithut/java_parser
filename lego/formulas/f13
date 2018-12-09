@@ -1,0 +1,2 @@
+forall x : [0..10] . forall y : [0..10] . x >= (x mod y)
+

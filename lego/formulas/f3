@@ -1,0 +1,5 @@
+forall x : [0..100]. forall y : [1..100] . 
+	((x mod y = 0) -> exists z : [0..100] . x = y * z) &&
+	(forall z : [1..100] . 
+		(x mod y = 0) && (y mod z = 0) -> x mod z = 0)
+

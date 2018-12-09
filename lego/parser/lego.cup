@@ -1,0 +1,140 @@
+// CISC422, Winter 2004, Assignment 1, Juergen Dingel.
+// JavaCup specification for Lego.
+// Generate parser with 
+//	>> java java_cup.Main < lego.cup
+package lego.parser;
+
+import java_cup.runtime.Symbol;
+import java_cup.runtime.lr_parser;
+import java.io.*;
+
+/* Terminals (tokens returned by the scanner) */
+terminal		T_EOF, T_ERROR, T_COLON, T_DOT;
+terminal 		T_LSQBRACE, T_RSQBRACE, T_PLUS, T_MINUS;
+terminal 		T_TIMES, T_DIVIDE, T_MOD, T_EQ, T_GREATER;
+terminal 		T_GREATEREQ, T_LPAREN, T_RPAREN; 
+terminal 		T_AND, T_OR, T_NOT, T_IMPLIES, T_EQUIV;
+terminal 		T_FORALL, T_EXISTS;
+terminal TokenValue 	T_INT, T_IDENTIFER;
+
+/* Non terminals */
+non terminal Formula	formula;
+non terminal Exp 	exp;
+non terminal String	rel_operator;
+non terminal String	unary_connective;
+non terminal String	binary_connective;
+non terminal String	quantifier;
+non terminal Domain	domain;
+non terminal String	int_operator;
+non terminal Int	int;
+non terminal Var	var;
+
+/* Precedences (from lowest to highest) */
+precedence		nonassoc T_FORALL, T_EXISTS;
+precedence 		left T_EQUIV;
+precedence 		left T_IMPLIES;
+precedence 		left T_OR;
+precedence 		left T_AND;
+precedence 		left T_NOT;
+precedence 		nonassoc T_EQ, T_GREATER, T_GREATEREQ;
+precedence 		left T_MOD;
+precedence 		left T_PLUS, T_MINUS; 
+precedence 		left T_TIMES, T_DIVIDE;
+
+/* The grammar */
+start with 		formula;
+
+formula ::= 		exp:e1 rel_operator:r exp:e2
+			{: RESULT = new Atomic(r, e1, e2); :}
+			| 
+			unary_connective:uc formula:f 
+			{: RESULT = new Unary(uc, f); :}
+			|
+			formula:f1 binary_connective:bc formula:f2
+			{: RESULT = new Binary(bc, f1, f2); :}
+			|	
+			quantifier:q var:v T_COLON domain:d T_DOT formula:f
+			{: RESULT = new Quantified(q, v, d, f); :}
+			|
+			T_LPAREN formula:f T_RPAREN
+			{: RESULT = f; :}
+			;
+
+exp ::=			int:n
+			{: RESULT = n; :}
+			|
+			var:v
+			{: RESULT = v; :}
+			|
+			exp:e1 int_operator:op exp:e2
+			{: RESULT = new BinExp(op, e1, e2); :}
+			|
+			T_LPAREN exp:e T_RPAREN
+			{: RESULT = e; :}
+			;
+
+rel_operator ::=	T_GREATER 
+			{: RESULT = ">"; :}
+			|
+			T_GREATEREQ
+			{: RESULT = ">="; :}
+			|
+			T_EQ
+			{: RESULT = "="; :}
+			;
+			
+unary_connective ::= 	T_NOT
+			{: RESULT = "!"; :}
+			;
+
+binary_connective ::= 	T_AND 
+			{: RESULT = "&&"; :}
+			| 
+			T_OR 
+			{: RESULT = "||"; :}
+			| 
+			T_IMPLIES 
+			{: RESULT = "->"; :}
+			| 
+			T_EQUIV 
+			{: RESULT = "<->"; :}
+			;
+
+quantifier ::=		T_FORALL 
+			{: RESULT = "forall"; :}
+			|
+			T_EXISTS
+			{: RESULT = "exists"; :}
+			;
+
+var ::=			T_IDENTIFER:id
+			{: RESULT = new Var(id.toString()); :}
+			;
+
+domain ::= 		T_LSQBRACE int:n1 T_DOT T_DOT int:n2 T_RSQBRACE
+			{: RESULT = new Domain(n1, n2); :}
+			;
+
+int ::=			T_INT:n
+			{: RESULT = new Int(new Integer(n.toInt())); :}
+			;
+
+int_operator ::= 	T_PLUS 
+			{: RESULT = "+"; :}
+			| 
+			T_MINUS 
+			{: RESULT = "-"; :}
+			| 
+			T_TIMES 
+			{: RESULT = "*"; :}
+			| 
+			T_DIVIDE 
+			{: RESULT = "/"; :}
+			| 
+			T_MOD
+			{: RESULT = "mod"; :}
+			; 
+
+
+
+

@@ -1,0 +1,1 @@
+Since the webpage doesn't tell us that we can modify the main.java file, the syntax error message can not be customized. Thus whenever an arithmetic syntax errors (i.e numbers divided by 0, module by 0, undefined variable) is thrown, it will print the message such as "Divisor is 0" "Modulus is 0" and "Variable is unbounded" while still showing the default exception error message.

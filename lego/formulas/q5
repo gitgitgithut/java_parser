@@ -1,0 +1,1 @@
+forall x : [1..100] . forall y : [1..100] . (0 = y mod x) -> (forall z : [1..100] . 0 = (z * y) mod x)

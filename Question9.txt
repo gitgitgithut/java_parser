@@ -1,0 +1,23 @@
+Q1: forall x : [0..10] . exists y : [1..20] . (x + y = 20)
+A1: True
+
+Q2: forall a : [0..50] . forall b : [1..50] . (a = ((b * (a / b)) + (a mod b)))
+A2: True
+
+Q3: exists x : [1..10] . exists y : [1..10] . exists z : [1..10] . ((z * z) = ((x * x) + (y * y)))
+A3: True	
+
+Q4: forall x : [3..10] . exists y : [2..7] . exists z : [2..7] . forall a : [2..10] . (!(0 = y mod a)) && (!(y = a)) && (!(0 = z mod a)) && (!(z = a)) && (!(y = z)) && (x = y + z)
+A4: False
+
+Q5: forall x : [1..100] . forall y : [1..100] . (0 = y mod x) -> (forall z : [1..100] . 0 = (z * y) mod x)
+A5: True
+
+Q6: forall p : [1..100] . ((forall a : [2..100]. !(0 = p mod a) && !(p = a)) && exists x : [1..100] . exists y : [1..100] . (0 = (x * y) mod p)) -> ((0 = x mod p) || (0 = y mod p))
+A6: True
+
+Q7: exists x : [1..10] . exists a : [1..10] . exists b :  [1..10] . exists c : [1..10] . (!(a = x)) && (0 = x mod a) && (!(b = x)) && (0 = x mod b) && (!(c = x)) && (0 = x mod c) && (!(a = b)) && (!(b = c)) && (!(a = c)) && (x = a + b + c)
+A7: True
+
+Q8: (forall p : [1..175] . (0 = 175 mod p) && forall a : [2..175] . !(0 = p mod a) && !(p = a)) -> ((p > 4) && (11 > p))
+A8: True
